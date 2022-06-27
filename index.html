@@ -19,31 +19,31 @@
                 });
                 svg.selectAll("*").each(function(d, i) { 
                     d3.select(this).on("contextmenu", function(event) {
-                    var coords = d3.pointer(event);
-                    var x = coords[0];
-                    var y = coords[1];
+                        var coords = d3.pointer(event);
+                        var x = coords[0];
+                        var y = coords[1];
 
-                    var min_dist = 5;
-                    var obj_index = null;
-                    var loop_running = true;
+                        var obj_index = null;
+                        var loop_running = true;
 
-                    objs.slice().reverse().forEach(element => {
-                        if (loop_running) {
-                            let dist = Math.hypot(Math.abs(parseInt(element.attr.cx)-x), Math.abs(parseInt(element.attr.cy)-y));
-                            if (dist < min_dist) {
-                                obj_index = objs.findIndex(element2 => element2 === element);
-                                loop_running  = false;
+                        objs.slice().reverse().forEach(element => {
+                            if (loop_running) {
+                                let dist = Math.hypot(Math.abs(parseInt(element.attr.cx)-x), Math.abs(parseInt(element.attr.cy)-y));
+                                if (dist < parseInt(element.attr.r) + parseInt(element.attr["stroke-width"]) / 2) {
+                                    obj_index = objs.findIndex(element2 => element2 === element);
+                                    loop_running  = false;
+                                }
                             }
+                        });
+
+                        if (obj_index != null) {
+                            objs.splice(obj_index, 1)
                         }
-                    });
 
-                    if (obj_index != null) {
-                        objs.splice(obj_index, 1)
-                    }
-
-                    rerender();
-                    event.preventDefault();
-                })})
+                        rerender();
+                        event.preventDefault();
+                    })
+                })
             }
             rerender();
             svg.on("click", function(event) {
