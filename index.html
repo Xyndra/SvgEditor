@@ -28,6 +28,29 @@
                 
                 rerender();
             })
+            svg.on("contextmenu", function(event) {
+                var coords = d3.pointer(event);
+                var x = coords[0];
+                var y = coords[1];
+
+                var shortest_dist = 20;
+                var shortest_index = null;
+
+                objs.forEach(element => {
+                    let dist = Math.hypot(Math.abs(parseInt(element.attr.cx)-x), Math.abs(parseInt(element.attr.cy)-y))
+                    if (dist < shortest_dist) {
+                        shortest_dist = dist;
+                        shortest_index = objs.findIndex(element2 => element2 === element)
+                    }
+                });
+
+                if (shortest_index != null) {
+                    objs.splice(shortest_index, 1)
+                }
+
+                rerender();
+                event.preventDefault();
+            })
         </script>
         <style>
             #svg {
