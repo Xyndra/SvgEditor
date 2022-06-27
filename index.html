@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+    </head>
+    <body style="margin: 0;">
+        <svg id="svg" style="width:100vh; height:100vh" viewBox="0 0 100 100"></svg>
+        <script>
+            svg = d3.select("svg")
+            objs = [
+                {elem: "circle", attr: {"cx": "50", "cy": "50", "r": "20", "stroke": "green", "stroke-width": "4", "fill": "yellow"}},
+            ]
+            function rerender() {
+                svg.selectAll("*").remove();
+                objs.forEach(element => {
+                    obj = svg.append(element.elem);
+                    for (const [key, value] of Object.entries(element.attr)) {
+                        obj.attr(key, value);
+                    }
+                });
+            }
+            rerender();
+            svg.on("click", function(event) {
+                var coords = d3.pointer(event);
+                var x = coords[0];
+                var y = coords[1];
+
+                objs.push({elem: "circle", attr: {"cx": x.toString(), "cy": y.toString(), "r": "5", "stroke": "green", "stroke-width": "4", "fill": "blue"}})
+                
+                rerender();
+            })
+        </script>
+        <style>
+            #svg {
+                margin-left:auto;
+                margin-right:auto;
+                display:block;
+                background-color: #fff;
+            }
+            body {
+                background-color: #222;
+            }
+        </style>
+    </body>
+</html>
