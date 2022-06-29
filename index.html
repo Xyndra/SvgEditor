@@ -10,11 +10,11 @@
                 <p><i class="fa-solid fa-grip-lines fa-xl"></i></p>
             </div>
             <p>
-            <i class="fa-regular fa-circle fa-2xl"></i>
+            <i class="fa-regular fa-circle fa-2xl selected_element" onclick="changeMode('circle')"></i>
             <br/>
             <br/>
             <br/>
-            <i class="fa-regular fa-square fa-2xl"></i>
+            <i class="fa-regular fa-square fa-2xl" onclick="changeMode('square')"></i>
             </p>
             <br/>
         </div>
@@ -23,19 +23,14 @@
             objs = [
                 {elem: "circle", attr: {"cx": "50", "cy": "50", "r": "20", "stroke": "green", "stroke-width": "4", "fill": "yellow"}},
             ]
+            var mode = "circle";
 
             // Make the DIV element draggable:
             dragElement(document.getElementById("sidebar1"));
 
             function dragElement(elmnt) {
                 var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-                if (document.getElementById(elmnt.id + "header")) {
-                    // if present, the header is where you move the DIV from:
-                    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-                } else {
-                    // otherwise, move the DIV from anywhere inside the DIV:
-                    elmnt.onmousedown = dragMouseDown;
-                }
+                document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
 
                 function dragMouseDown(e) {
                     e = e || window.event;
@@ -71,6 +66,22 @@
                     document.onmouseup = null;
                     document.onmousemove = null;
                 }
+            }
+
+            function changeMode(newMode) {
+                let current = document.getElementsByClassName("selected_element")[0];
+                        current.classList.remove("selected_element");
+                switch(newMode) {
+                    case "circle":
+                        let circle = document.getElementsByClassName("fa-circle")[0];
+                        circle.classList.add("selected_element");
+                        break;
+                    case "square":
+                        let square = document.getElementsByClassName("fa-square")[0];
+                        square.classList.add("selected_element");
+                        break;
+                }
+                mode = newMode;
             }
 
             function rerender() {
@@ -114,8 +125,15 @@
                 var coords = d3.pointer(event);
                 var x = coords[0];
                 var y = coords[1];
-
-                objs.push({elem: "circle", attr: {"cx": x.toString(), "cy": y.toString(), "r": "5", "stroke": "green", "stroke-width": "4", "fill": "blue"}})
+                
+                switch(mode){
+                    case "circle":
+                        objs.push({elem: "circle", attr: {"cx": x.toString(), "cy": y.toString(), "r": "5", "stroke": "green", "stroke-width": "4", "fill": "blue"}})
+                        break;
+                    case "square":
+                        objs.push({elem: "rect", attr: {"cx": x.toString(), "cy": y.toString(), "x": (x-5).toString(), "y": (y-5).toString(), "r": "5", "width": "10", "height": "10", "stroke": "green", "stroke-width": "1", "fill": "blue"}})
+                        break;
+                }
                 
                 rerender();
             })
@@ -145,6 +163,9 @@
                 cursor: move;
                 z-index: 10;
                 color: #fff;
+            }
+            .selected_element {
+                color: LimeGreen;
             }
             body {
                 background-color: #222;
