@@ -18,7 +18,7 @@
             <br/>
             <br/>
             <br/>
-            <i class="fa-solid fa-file-arrow-down fa-2xl"></i>
+            <i class="fa-solid fa-file-arrow-down fa-2xl" onclick="download('svgdata.json')"></i>
             <br/>
             <br/>
             <br/>
@@ -36,6 +36,20 @@
                 {elem: "circle", attr: {"cx": "50", "cy": "50", "r": "20", "stroke": "green", "stroke-width": "4", "fill": "yellow"}},
             ]
             var mode = "circle";
+
+
+            function download(filename){
+                var element = document.createElement('a');
+                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(objs)));
+                element.setAttribute('download', filename);
+
+                element.style.display = 'none';
+                document.body.appendChild(element);
+
+                element.click();
+
+                document.body.removeChild(element);
+            }
 
             // Make the DIV element draggable:
             dragElement(document.getElementById("sidebar1"));
