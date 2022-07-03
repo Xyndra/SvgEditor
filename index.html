@@ -19,15 +19,15 @@
             <br/>
             <br/>
             <br/>
-            <i class="fa-solid fa-file-arrow-down fa-2xl" onclick="download('svgdata.json')"></i>
+            <i class="fa-solid fa-file-arrow-down fa-2xl unselectable_tool" onclick="download('svgdata.json')"></i>
             <br/>
             <br/>
             <br/>
-            <i class="fa-solid fa-file-arrow-up fa-2xl" onclick="upload()"></i>
+            <i class="fa-solid fa-file-arrow-up fa-2xl unselectable_tool" onclick="upload()"></i>
             <br/>
             <br/>
             <br/>
-            <i class="fa-solid fa-file-export  fa-2xl" onclick="exportsvg('svg.svg')"></i>
+            <i class="fa-solid fa-file-export fa-2xl unselectable_tool" onclick="exportsvg('svg.svg')"></i>
             </p>
             <br/>
         </div>
@@ -246,6 +246,14 @@
 
         </script>
         <style>
+            /* color palette:
+                body-background: #222
+                svg-background: #fff
+                sidebar-color: Crimson
+                sidebar-background: MidnightBlue
+                selected-color: LimeGreen
+                static-color: #32CDCC
+             */
             #svg {
                 position: relative;
                 margin-left:auto;
@@ -275,6 +283,9 @@
             }
             body {
                 background-color: #222;
+            }
+            .unselectable_tool {
+                color: #32cdcc;
             }
         </style>
     </body>
