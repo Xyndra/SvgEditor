@@ -1,7 +1,8 @@
-<html>
+<html lang="">
     <head>
         <script src="https://d3js.org/d3.v7.min.js"></script>
         <script src="https://kit.fontawesome.com/ca6139f5ee.js" crossorigin="anonymous"></script>
+        <title>SVG Editor</title>
     </head>
     <body style="margin: 0;">
         <svg id="svg" style="width:100vh; height:100vh; max-width: 100vw; max-height: 100vw;" viewBox="0 0 100 100"></svg>
@@ -32,14 +33,17 @@
         </div>
         <script>
             svg = d3.select("svg")
-            objs = [
-                {elem: "circle", attr: {"cx": "50", "cy": "50", "r": "20", "stroke": "green", "stroke-width": "4", "fill": "yellow"}},
-            ]
-            var mode = "circle";
+            let objs = [
+                {
+                    elem: "circle",
+                    attr: {"cx": "50", "cy": "50", "r": "20", "stroke": "green", "stroke-width": "4", "fill": "yellow"}
+                },
+            ];
+            let mode = "circle";
 
 
             function download(filename){
-                var element = document.createElement('a');
+                const element = document.createElement('a');
                 element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(objs)));
                 element.setAttribute('download', filename);
 
@@ -52,26 +56,27 @@
             }
 
             function upload() {
-                var input = document.createElement('input');
+                const input = document.createElement('input');
                 input.style.visibility = 'hidden';
                 input.type = 'file';
 
                 input.onchange = e => { 
 
                     // getting a hold of the file reference
-                    var file = e.target.files[0]; 
+                    const file = e.target.files[0];
 
                     // setting up the reader
-                    var reader = new FileReader();
+                    const reader = new FileReader();
                     reader.readAsText(file,'UTF-8');
 
                     // here we tell the reader what to do when it's done reading...
                     reader.onload = readerEvent => {
                         let content = readerEvent.target.result; // this is the content!
-                        try {  
-                            objs = JSON.parse(content);  
+                        try {
+                            // noinspection JSCheckFunctionSignatures
+                            objs = JSON.parse(content);
                             rerender()
-                        } catch (e) {  
+                        } catch (e) {
                             console.log('invalid json');
                         }
                     }
@@ -83,7 +88,7 @@
 
             function exportsvg(filename) {
                 let output = '<svg style="width:100vh; height:100vh; max-width: 100vw; max-height: 100vw;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">' + document.getElementById("svg").innerHTML + '</svg>';
-                var element = document.createElement('a');
+                const element = document.createElement('a');
                 element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(output));
                 element.setAttribute('download', filename);
 
@@ -99,11 +104,10 @@
             dragElement(document.getElementById("sidebar1"));
 
             function dragElement(elmnt) {
-                var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
                 document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
 
                 function dragMouseDown(e) {
-                    e = e || window.event;
                     e.preventDefault();
                     // get the mouse cursor position at startup:
                     pos3 = e.clientX;
@@ -114,7 +118,6 @@
                 }
 
                 function elementDrag(e) {
-                    e = e || window.event;
                     e.preventDefault();
                     // calculate the new cursor position:
                     pos1 = pos3 - e.clientX;
@@ -157,19 +160,19 @@
             function rerender() {
                 svg.selectAll("*").remove();
                 objs.forEach(element => {
-                    obj = svg.append(element.elem);
+                    let obj = svg.append(element.elem);
                     for (const [key, value] of Object.entries(element.attr)) {
                         obj.attr(key, value);
                     }
                 });
-                svg.selectAll("*").each(function(d, i) { 
+                svg.selectAll("*").each(function() {
                     d3.select(this).on("contextmenu", function(event) {
-                        var coords = d3.pointer(event);
-                        var x = coords[0];
-                        var y = coords[1];
+                        const coords = d3.pointer(event);
+                        const x = coords[0];
+                        const y = coords[1];
 
-                        var obj_index = null;
-                        var loop_running = true;
+                        let obj_index = null;
+                        let loop_running = true;
 
                         objs.slice().reverse().forEach(element => {
                             if (loop_running) {
@@ -192,10 +195,10 @@
             }
             rerender();
             svg.on("click", function(event) {
-                var coords = d3.pointer(event);
-                var x = coords[0];
-                var y = coords[1];
-                
+                const coords = d3.pointer(event);
+                const x = coords[0];
+                const y = coords[1];
+
                 switch(mode){
                     case "circle":
                         objs.push({elem: "circle", attr: {"cx": x.toString(), "cy": y.toString(), "r": "5", "stroke": "green", "stroke-width": "4", "fill": "blue"}})
