@@ -73,11 +73,31 @@
                     reader.onload = readerEvent => {
                         let content = readerEvent.target.result; // this is the content!
                         try {
+                            // Try to read json
                             // noinspection JSCheckFunctionSignatures
                             objs = JSON.parse(content);
-                            rerender()
                         } catch (e) {
-                            console.log('invalid json');
+                            objs = [];
+                            // Check file content for svg elements and add them to objs via these regexes:
+                            // <([^/ ]+) ([^\/>]*)(?:><\/(?:\1)>|\/>) (group 1: elem, group 2: attr)
+                            // [ ]?([^=]+)="([^"]*)" // split attr string into json object
+                            content.match(/<([^/ ]+) ([^>]*)><\/(\1)>/g).forEach(function(elem) {
+                                let elem_name = elem.match(/<([^/ ]+) ([^>]*)><\/(\1)>/)[1];
+                                let elem_attr = elem.match(/<([^/ ]+) ([^>]*)><\/(\1)>/)[2];
+                                let elem_attr_json = {};
+                                elem_attr.split(" ").forEach(function(attr) {
+                                    let attr_name = attr.match(/([^=]+)="([^"]*)"/)[1];
+                                    elem_attr_json[attr_name] = attr.match(/([^=]+)="([^"]*)"/)[2];
+                                });
+                                if (elem_name === "circle" || elem_name === "rect") {
+                                    objs.push({
+                                        elem: elem_name,
+                                        attr: elem_attr_json
+                                    });
+                                }
+                            });
+                        } finally {
+                            rerender();
                         }
                     }
 
@@ -176,10 +196,23 @@
 
                         objs.slice().reverse().forEach(element => {
                             if (loop_running) {
-                                let dist = Math.hypot(Math.abs(parseInt(element.attr.cx)-x), Math.abs(parseInt(element.attr.cy)-y));
-                                if (dist < parseInt(element.attr.r) + parseInt(element.attr["stroke-width"]) / 2) {
-                                    obj_index = objs.findIndex(element2 => element2 === element);
-                                    loop_running  = false;
+                                // check if element is circle or rectangle
+                                if (element.elem === "circle") {
+                                    // check if click is inside element (including stroke)
+                                    if (Math.sqrt(Math.pow(x - parseFloat(element.attr.cx), 2) + Math.pow(y - parseFloat(element.attr.cy), 2))
+                                        <= parseFloat(element.attr.r) + (parseFloat(element.attr["stroke-width"]) / 2)) {
+                                        obj_index = objs.indexOf(element);
+                                        loop_running = false;
+                                    }
+                                } else if (element.elem === "rect") {
+                                    // check if click is inside element (including stroke)
+                                    if (x > parseFloat(element.attr.x) - parseFloat(element.attr["stroke-width"]) &&
+                                        x < parseFloat(element.attr.x) + parseFloat(element.attr.width) + parseFloat(element.attr["stroke-width"]) &&
+                                        y > parseFloat(element.attr.y) - parseFloat(element.attr["stroke-width"]) &&
+                                        y < parseFloat(element.attr.y) + parseFloat(element.attr.height) + parseFloat(element.attr["stroke-width"])) {
+                                        obj_index = objs.indexOf(element);
+                                        loop_running = false;
+                                    }
                                 }
                             }
                         });
@@ -204,7 +237,7 @@
                         objs.push({elem: "circle", attr: {"cx": x.toString(), "cy": y.toString(), "r": "5", "stroke": "green", "stroke-width": "4", "fill": "blue"}})
                         break;
                     case "square":
-                        objs.push({elem: "rect", attr: {"cx": x.toString(), "cy": y.toString(), "x": (x-5).toString(), "y": (y-5).toString(), "r": "5", "width": "10", "height": "10", "stroke": "green", "stroke-width": "1", "fill": "blue"}})
+                        objs.push({elem: "rect", attr: {"x": (x-5).toString(), "y": (y-5).toString(), "r": "5", "width": "10", "height": "10", "stroke": "green", "stroke-width": "1", "fill": "blue"}})
                         break;
                 }
                 
