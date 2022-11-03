@@ -10,26 +10,17 @@
             <div id="sidebar1header">
                 <p><i class="fa-solid fa-grip-lines fa-xl"></i></p>
             </div>
-            <p>
-            <i class="fa-regular fa-circle fa-2xl selected_element" onclick="changeMode('circle')"></i>
-            <br/>
-            <br/>
-            <br/>
-            <i class="fa-regular fa-square fa-2xl" onclick="changeMode('square')"></i>
-            <br/>
-            <br/>
-            <br/>
-            <i class="fa-solid fa-file-arrow-down fa-2xl unselectable_tool" onclick="download('svgdata.json')"></i>
-            <br/>
-            <br/>
-            <br/>
-            <i class="fa-solid fa-file-arrow-up fa-2xl unselectable_tool" onclick="upload()"></i>
-            <br/>
-            <br/>
-            <br/>
-            <i class="fa-solid fa-file-export fa-2xl unselectable_tool" onclick="exportsvg('svg.svg')"></i>
+            <p class="holder">
+                <i class="fa fa-regular fa-circle fa-2x fa-fw selected_element" onclick="changeMode('circle')"></i>
+                <br/>
+                <i class="fa fa-regular fa-square fa-2x fa-fw" onclick="changeMode('square')"></i>
+                <br/>
+                <i class="fa fa-solid fa-file-arrow-down fa-2x fa-fw unselectable_tool" onclick="download('svgdata.json')"></i>
+                <br/>
+                <i class="fa fa-solid fa-file-arrow-up fa-2x fa-fw unselectable_tool" onclick="upload()"></i>
+                <br/>
+                <i class="fa fa-solid fa-file-export fa-2x fa-fw unselectable_tool" onclick="exportsvg('svg.svg')"></i>
             </p>
-            <br/>
         </div>
         <script>
             svg = d3.select("svg")
@@ -265,15 +256,21 @@
                 position: absolute;
                 left: 0;
                 top: 0;
+                padding-left: 2.5px;
+                padding-right: 2.5px;
+                border-width: 5px;
+                border-style: solid;
                 z-index: 9;
                 background-color: MidnightBlue;
-                border: 5px solid MidnightBlue;
-                border-radius: 35% / 10%;
-                color: Crimson;
+                color: midnightblue;
+                border-top-left-radius: 25% 10%;
+                border-bottom-left-radius: 25% 10%;
+                border-top-right-radius: 25% 10%;
+                border-bottom-right-radius: 25% 10%;
                 text-align: center;
             }
             #sidebar1header {
-                padding: 10px;
+                padding: 5px 15px;
                 cursor: move;
                 z-index: 10;
                 color: #fff;
@@ -286,6 +283,14 @@
             }
             .unselectable_tool {
                 color: #32cdcc;
+            }
+            .holder {
+                margin: 0;
+                margin-bottom: 5px;
+                color: Crimson;
+            }
+            i {
+                margin-bottom: 10%;
             }
         </style>
     </body>
