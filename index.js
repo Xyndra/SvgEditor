@@ -11,8 +11,10 @@ export let objs = [
 ];
 let mode = "circle";
 
+// region draggable
 // Make the DIV element draggable:
 dragElement(document.getElementById("sidebar1"));
+dragElement(document.getElementById("sidebar2"));
 
 function dragElement(element) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -51,6 +53,7 @@ function dragElement(element) {
         document.onmousemove = null;
     }
 }
+// endregion
 
 export function changeMode(newMode) {
     let current = document.getElementsByClassName("selected_element")[0];

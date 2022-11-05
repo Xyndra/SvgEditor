@@ -3,6 +3,9 @@
         <script src="https://d3js.org/d3.v7.min.js"></script>
         <script src="https://kit.fontawesome.com/ca6139f5ee.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="index.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
         <script type="module" src="index.js"></script>
         <title>SVG Editor</title>
     </head>
@@ -12,6 +15,7 @@
             <div id="sidebar1header">
                 <p><i class="fa-solid fa-grip-lines fa-xl"></i></p>
             </div>
+
             <p class="holder">
                 <i class="fa fa-regular fa-circle fa-2x fa-fw selected_element" onclick="changeMode('circle')"></i>
                 <br/>
@@ -22,6 +26,29 @@
                 <i class="fa fa-solid fa-file-arrow-up fa-2x fa-fw unselectable_tool" onclick="upload()"></i>
                 <br/>
                 <i class="fa fa-solid fa-file-export fa-2x fa-fw unselectable_tool" onclick="exportsvg('svg.svg')"></i>
+            </p>
+        </div>
+        <div id="sidebar2">
+            <div id="sidebar2header">
+                <p><i class="fa-solid fa-palette fa-xl"></i><i class="real-text">   Primary</i></p>
+            </div>
+
+            <p class="holder">
+                <i class="fa fa-solid fa-droplet fa-2x fa-fw" style="color: crimson"></i>
+                <i class="fa fa-solid fa-droplet fa-2x fa-fw" style="color: blue"></i>
+                <i class="fa fa-solid fa-droplet fa-2x fa-fw" style="color: yellow"></i>
+                <i class="fa fa-solid fa-droplet fa-2x fa-fw" style="color: limegreen"></i>
+            </p>
+
+            <div id="sidebar2header2">
+                <p><i class="fa fa-palette fa-xl"></i><i class="real-text">   Secondary</i></p>
+            </div>
+
+            <p class="holder">
+                <i class="fa fa-solid fa-droplet fa-2x fa-fw" style="color: crimson"></i>
+                <i class="fa fa-solid fa-droplet fa-2x fa-fw" style="color: blue"></i>
+                <i class="fa fa-solid fa-droplet fa-2x fa-fw" style="color: yellow"></i>
+                <i class="fa fa-solid fa-droplet fa-2x fa-fw" style="color: limegreen"></i>
             </p>
         </div>
     </body>
