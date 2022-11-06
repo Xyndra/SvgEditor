@@ -17,22 +17,22 @@
     z-index: 9;
     background-color: MidnightBlue;
     color: midnightblue;
-    /*#region border-radius: 25% 10%;*/
+    /*#region border-radius: 25% 20%;*/
     /*noinspection CssReplaceWithShorthandSafely*/
-    border-top-left-radius: 25% 10%;
+    border-top-left-radius: 25% 20%;
     /*noinspection CssReplaceWithShorthandSafely*/
-    border-bottom-left-radius: 25% 10%;
+    border-bottom-left-radius: 25% 20%;
     /*noinspection CssReplaceWithShorthandSafely*/
-    border-top-right-radius: 25% 10%;
+    border-top-right-radius: 25% 20%;
     /*noinspection CssReplaceWithShorthandSafely*/
-    border-bottom-right-radius: 25% 10%;
+    border-bottom-right-radius: 25% 20%;
     /*#endregion*/
     text-align: center;
 }
 #sidebar2 {
     position: absolute;
     left: 0;
-    top: 400px;
+    top: 250px;
     padding-left: 3px;
     padding-right: 3px;
     border-width: 5px;
@@ -40,23 +40,28 @@
     z-index: 8;
     background-color: MidnightBlue;
     color: midnightblue;
-    /*#region border-radius: 25% 10%;*/
+    /*#region border-radius: 25% 20%;*/
     /*noinspection CssReplaceWithShorthandSafely*/
-    border-top-left-radius: 25% 10%;
+    border-top-left-radius: 25% 20%;
     /*noinspection CssReplaceWithShorthandSafely*/
-    border-bottom-left-radius: 25% 10%;
+    border-bottom-left-radius: 25% 20%;
     /*noinspection CssReplaceWithShorthandSafely*/
-    border-top-right-radius: 25% 10%;
+    border-top-right-radius: 25% 20%;
     /*noinspection CssReplaceWithShorthandSafely*/
-    border-bottom-right-radius: 25% 10%;
+    border-bottom-right-radius: 25% 20%;
     /*#endregion*/
     text-align: center;
 }
 #sidebar1header {
-    padding: 5px 15px;
+    padding: 0 15px 5px 15px;
+    margin-top: 0;
     cursor: move;
     z-index: 10;
     color: #fff;
+}
+#sidebar1header p {
+    margin: 5px 0 5px 0;
+    padding: 0;
 }
 #sidebar2header {
     padding: 5px 15px;
@@ -64,7 +69,12 @@
     z-index: 10;
     color: #fff;
 }
-#sidebar2header2 {
+p.header-holder {
+    margin: 0;
+    padding: 0;
+    height: 0;
+}
+.sidebar2header2 {
     padding: 5px 15px;
     cursor: move;
     z-index: 10;
@@ -86,11 +96,11 @@ body {
 i {
     margin-bottom: 10%;
 }
-p {
-}
 .real-text {
     font-family: "Roboto", serif;
     font-size: larger;
     font-style: normal;
-    color: #fff;
+}
+.header-holder {
+    margin: 0 0 0 0;
 }

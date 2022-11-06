@@ -6,7 +6,7 @@ let svg = d3.select("svg");
 export let objs = [
     {
         elem: "circle",
-        attr: {"cx": "50", "cy": "50", "r": "20", "stroke": "green", "stroke-width": "4", "fill": "yellow"}
+        attr: {"cx": "50", "cy": "50", "r": "20", "stroke": "limegreen", "stroke-width": "4", "fill": "yellow"}
     },
 ];
 let mode = "circle";
@@ -130,10 +130,10 @@ svg.on("click", function(event) {
 
     switch(mode){
         case "circle":
-            objs.push({elem: "circle", attr: {"cx": x.toString(), "cy": y.toString(), "r": "5", "stroke": "green", "stroke-width": "4", "fill": "blue"}})
+            objs.push({elem: "circle", attr: {"cx": x.toString(), "cy": y.toString(), "r": "5", "stroke": "limegreen", "stroke-width": "4", "fill": "blue"}})
             break;
         case "square":
-            objs.push({elem: "rect", attr: {"x": (x-5).toString(), "y": (y-5).toString(), "r": "5", "width": "10", "height": "10", "stroke": "green", "stroke-width": "1", "fill": "blue"}})
+            objs.push({elem: "rect", attr: {"x": (x-5).toString(), "y": (y-5).toString(), "r": "5", "width": "10", "height": "10", "stroke": "limegreen", "stroke-width": "1", "fill": "blue"}})
             break;
     }
 

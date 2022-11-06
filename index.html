@@ -18,11 +18,9 @@
 
             <p class="holder">
                 <i class="fa fa-regular fa-circle fa-2x fa-fw selected_element" onclick="changeMode('circle')"></i>
-                <br/>
                 <i class="fa fa-regular fa-square fa-2x fa-fw" onclick="changeMode('square');"></i>
                 <br/>
                 <i class="fa fa-solid fa-file-arrow-down fa-2x fa-fw unselectable_tool" onclick="download('svgdata.json')"></i>
-                <br/>
                 <i class="fa fa-solid fa-file-arrow-up fa-2x fa-fw unselectable_tool" onclick="upload()"></i>
                 <br/>
                 <i class="fa fa-solid fa-file-export fa-2x fa-fw unselectable_tool" onclick="exportsvg('svg.svg')"></i>
@@ -30,7 +28,11 @@
         </div>
         <div id="sidebar2">
             <div id="sidebar2header">
-                <p><i class="fa-solid fa-palette fa-xl"></i><i class="real-text">   Primary</i></p>
+                <p class="header-holder"><i class="fa-solid fa-grip-lines fa-xl"></i></p>
+            </div>
+
+            <div class="sidebar2header2">
+                <p style="color: blue;"><i class="fa-solid fa-palette fa-xl"></i><i class="real-text">   Primary</i></p>
             </div>
 
             <p class="holder">
@@ -40,8 +42,8 @@
                 <i class="fa fa-solid fa-droplet fa-2x fa-fw" style="color: limegreen"></i>
             </p>
 
-            <div id="sidebar2header2">
-                <p><i class="fa fa-palette fa-xl"></i><i class="real-text">   Secondary</i></p>
+            <div class="sidebar2header2">
+                <p style="color: limegreen;"><i class="fa fa-palette fa-xl"></i><i class="real-text">   Secondary</i></p>
             </div>
 
             <p class="holder">
