@@ -3,15 +3,24 @@ export {download, upload, exportsvg} from "./file_handler.js"
 
 let svg = d3.select("svg");
 /** @type {Array<{elem: string, attr: any}>} */
-export let objs = [
+var objs = [
     {
         elem: "circle",
         attr: {"cx": "50", "cy": "50", "r": "20", "stroke": "limegreen", "stroke-width": "4", "fill": "yellow"}
     },
 ];
+export function getObjs() {
+    return objs;
+}
+export function setObjs(newObjs) {
+    objs = newObjs;
+    rerender();
+}
 let mode = "circle";
+var primary = "blue";
+var secondary = "limegreen";
 
-// region draggable
+// #region draggable
 // Make the DIV element draggable:
 dragElement(document.getElementById("sidebar1"));
 dragElement(document.getElementById("sidebar2"));
@@ -53,7 +62,7 @@ function dragElement(element) {
         document.onmousemove = null;
     }
 }
-// endregion
+// #endregion
 
 export function changeMode(newMode) {
     let current = document.getElementsByClassName("selected_element")[0];
@@ -71,6 +80,17 @@ export function changeMode(newMode) {
     mode = newMode;
 }
 window.changeMode = changeMode;
+
+export function changeColor(newColor, is_primary) {
+    if(is_primary) {
+        primary = newColor;
+        document.getElementById("primary_colors").style.color = primary;
+    } else {
+        secondary = newColor;
+        document.getElementById("secondary_colors").style.color = secondary;
+    }    
+}
+window.changeColor = changeColor;
 
 export function rerender() {
     svg.selectAll("*").remove();
@@ -130,10 +150,10 @@ svg.on("click", function(event) {
 
     switch(mode){
         case "circle":
-            objs.push({elem: "circle", attr: {"cx": x.toString(), "cy": y.toString(), "r": "5", "stroke": "limegreen", "stroke-width": "4", "fill": "blue"}})
+            objs.push({elem: "circle", attr: {"cx": x.toString(), "cy": y.toString(), "r": "5", "stroke": secondary, "stroke-width": "4", "fill": primary}})
             break;
         case "square":
-            objs.push({elem: "rect", attr: {"x": (x-5).toString(), "y": (y-5).toString(), "r": "5", "width": "10", "height": "10", "stroke": "limegreen", "stroke-width": "1", "fill": "blue"}})
+            objs.push({elem: "rect", attr: {"x": (x-5).toString(), "y": (y-5).toString(), "r": "5", "width": "10", "height": "10", "stroke": secondary, "stroke-width": "1", "fill": primary}})
             break;
     }
 

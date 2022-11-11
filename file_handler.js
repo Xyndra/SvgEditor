@@ -1,4 +1,4 @@
-import {objs, rerender} from "./index.js"
+import {setObjs} from "./index.js"
 
 export function download(filename){
     const element = document.createElement('a');
@@ -34,12 +34,13 @@ export function upload() {
         // here we tell the reader what to do when it's done reading...
         reader.onload = readerEvent => {
             let content = readerEvent.target.result; // this is the content!
+            let import_objs;
             try {
                 // Try to read json
                 // noinspection JSCheckFunctionSignatures
-                objs = JSON.parse(content);
+                import_objs = JSON.parse(content);
             } catch (e) {
-                objs = [];
+                import_objs = [];
                 // Check file content for svg elements and add them to objs via these regexes:
                 // <([^/ ]+) ([^\/>]*)(?:><\/(?:\1)>|\/>) (group 1: elem, group 2: attr)
                 // [ ]?([^=]+)="([^"]*)" // split attr string into json object
@@ -53,14 +54,14 @@ export function upload() {
                     });
                     if (elem_name === "circle" || elem_name === "rect") {
                         // noinspection JSCheckFunctionSignatures
-                        objs.push({
+                        import_objs.push({
                             "elem": elem_name,
                             "attr": elem_attr_json
                         });
                     }
                 });
             } finally {
-                rerender();
+                setObjs(import_objs);
             }
         }
 
