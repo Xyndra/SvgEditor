@@ -10,5 +10,9 @@ If you, for some reason, want this, it'll come out in ~1 year if I don't quit, a
 - Client side only - This should not have to be maintained anywhere, it should just be able to be opened in a browser
 - Good look - just make the ui look good, no one wants half-finished ui
 
+
+# Github Pages Link:
+https://xyndra.github.io/SvgEditor/
+
 ## Preview Screenshot (will be updated)
 ![](screenshot.png)
