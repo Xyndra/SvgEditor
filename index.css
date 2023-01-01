@@ -31,8 +31,8 @@
 }
 #sidebar2 {
     position: absolute;
-    left: 0;
-    top: 250px;
+    left: 150px;
+    top: 0;
     padding-left: 3px;
     padding-right: 3px;
     border-width: 5px;
